@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "teseract serve",
+    "test": "teseract test",
+    "release": "teseract release"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "teseract": "^2.8.0"
+  },
+  "dependencies": {
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
