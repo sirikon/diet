@@ -14,10 +14,11 @@ export default function(weekPlan: WeekPlan<Product>, from: Timestamp, to: Timest
   const daysDiff = toDate.diff(fromDate, "days")
   const completeDays = Math.max(0, daysDiff-1)
 
-  const totalMeals =
-    (meals.length - meals.indexOf(from.meal)) +
-    (completeDays * meals.length) +
-    (meals.indexOf(to.meal) + 1);
+  const totalMeals = daysDiff > 0
+    ? (meals.length - meals.indexOf(from.meal)) +
+      (completeDays * meals.length) +
+      (meals.indexOf(to.meal) + 1)
+    : Math.max(0, (meals.indexOf(to.meal) - meals.indexOf(from.meal)) + 1)
 
   const amountMap: { [key in Product]?: { amount: number } } = {}
   let mealCounter = meals.indexOf(from.meal);

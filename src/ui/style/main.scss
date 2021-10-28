@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  height: 100%;
+
+  background-color: aliceblue;
+}
+
+body, input, select {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.content {
+  padding: 10px;
+}
+
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 5px 0;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+
+    > span {
+      width: 3em;
+      font-size: 1em;
+    }
+
+    .date-input {
+      flex-grow: 1;
+      font-size: 1em;
+      align-self: stretch;
+    }
+
+    .meal-selector {
+      flex-shrink: 0;
+      font-size: 1em;
+      align-self: stretch;
+    }
+  }
+}
