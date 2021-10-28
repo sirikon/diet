@@ -33,15 +33,16 @@ body, input, select {
     }
 
     .date-input {
-      flex-grow: 1;
+      flex-grow: 3;
       font-size: 1em;
       align-self: stretch;
     }
 
     .meal-selector {
-      flex-shrink: 0;
+      flex-grow: 1;
       font-size: 1em;
       align-self: stretch;
+      text-align: center;
     }
   }
 }
