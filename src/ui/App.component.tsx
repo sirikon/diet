@@ -9,8 +9,8 @@ import ShoppingListSection from "./sections/ShoppingList/ShoppingList.component"
 import PlanningSection from "./sections/Planning/Planning.component"
 
 const routes: [string, string, () => JSX.Element][] = [
+  ["planning", "Planning", PlanningSection],
   ["shopping-list", "Shopping List", ShoppingListSection],
-  ["planning", "Planning", PlanningSection]
 ]
 
 export default () => {
@@ -32,7 +32,7 @@ export default () => {
               <Redirect to={`/${routes[0][0]}`}></Redirect>
             </Route>
             {routes.map(r =>
-              <Route exact path={`/${r[0]}`}>
+              <Route path={`/${r[0]}`}>
                 {React.createElement(r[2])}
               </Route>)}
           </Switch>
