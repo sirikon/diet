@@ -3,7 +3,7 @@ import { BaseItem, WeekPlan } from "./models";
 export const products = [
   "gr Queso en lonchas",
   "gr Pechuga de pavo en lonchas",
-  "u Fruta grande",
+  "Frutas grandes",
   "raciones Verduras",
   "raciones Lechuga",
   "raciones Ensalada",
@@ -16,9 +16,9 @@ export const products = [
   "gr Pescado azul",
   "gr Pescado blanco",
   "ml Leche",
-  "Arroz en vasitos para microondas",
-  "Tomate",
-  "Yogur natural",
+  "Arroces en vasitos para microondas",
+  "Tomates",
+  "Yogures naturales",
   "gr Chocolate 85%",
 ] as const
 export type Product = (typeof products)[number]
@@ -30,7 +30,7 @@ const item = (amount: number, product: Product): Item =>
 const breakfast = (): Item[] => [
   item(40, "gr Queso en lonchas"),
   item(70, "gr Pechuga de pavo en lonchas"),
-  item(1, "u Fruta grande")
+  item(1, "Frutas grandes")
 ]
 
 export const weekPlan: WeekPlan<Product> = {
@@ -39,10 +39,10 @@ export const weekPlan: WeekPlan<Product> = {
     lunch: [
       item(1, "raciones Verduras"),
       item(200, "gr Pechuga de pollo"),
-      item(1, "u Fruta grande")
+      item(1, "Frutas grandes")
     ],
     dinner: [
-      item(1, "Arroz en vasitos para microondas"),
+      item(1, "Arroces en vasitos para microondas"),
       item(200, "gr Pescado azul"),
       item(200, "ml Leche")
     ]
@@ -54,7 +54,7 @@ export const weekPlan: WeekPlan<Product> = {
       item(1, "raciones Verduras"),
       item(200, "gr Pechuga de pavo"),
       item(1, "raciones Lechuga"),
-      item(1, "Tomate")
+      item(1, "Tomates")
     ],
     dinner: [
       item(400, "gr Patatas"),
@@ -71,7 +71,7 @@ export const weekPlan: WeekPlan<Product> = {
       item(200, "gr Pechuga de pollo")
     ],
     dinner: [
-      item(1, "Arroz en vasitos para microondas"),
+      item(1, "Arroces en vasitos para microondas"),
       item(200, "gr Pechuga de pollo"),
       item(30, "gr Chocolate 85%")
     ]
@@ -85,7 +85,7 @@ export const weekPlan: WeekPlan<Product> = {
       item(40, "gr Almendras")
     ],
     dinner: [
-      item(1, "Arroz en vasitos para microondas"),
+      item(1, "Arroces en vasitos para microondas"),
       item(200, "gr Pechuga de pavo"),
       item(30, "gr Chocolate 85%")
     ]
@@ -118,10 +118,10 @@ export const weekPlan: WeekPlan<Product> = {
     lunch: [
       item(1, "raciones Legumbres"),
       item(200, "gr Pescado blanco"),
-      item(1, "Yogur natural")
+      item(1, "Yogures naturales")
     ],
     dinner: [
-      item(1, "Arroz en vasitos para microondas"),
+      item(1, "Arroces en vasitos para microondas"),
       item(200, "gr Pechuga de pavo"),
       item(30, "gr Chocolate 85%")
     ]
