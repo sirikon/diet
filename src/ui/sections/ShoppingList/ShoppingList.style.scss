@@ -1,0 +1,28 @@
+.shopping-list-controls {
+  padding: 5px 0 0 0;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+
+    > span {
+      width: 3em;
+      font-size: 1em;
+    }
+
+    .date-input {
+      flex-grow: 3;
+      font-size: 1em;
+      align-self: stretch;
+    }
+
+    .meal-selector {
+      flex-grow: 1;
+      font-size: 1em;
+      align-self: stretch;
+      text-align: center;
+    }
+  }
+}
