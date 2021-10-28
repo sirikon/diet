@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "prepare": "teseract gen",
     "start": "teseract serve",
     "test": "teseract test",
     "release": "teseract release"
