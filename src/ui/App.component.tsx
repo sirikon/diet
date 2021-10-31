@@ -1,7 +1,7 @@
 import "./App.style.scss"
 
 import React, { useState, useRef, useEffect } from "react"
-import { HashRouter, Switch, Route, Redirect, Link } from "react-router-dom"
+import { HashRouter, Switch, Route, Redirect, NavLink, Link, useLocation } from "react-router-dom"
 
 import { ControlsPortalContext } from "./utils/ControlsPortal"
 
@@ -39,34 +39,35 @@ export default () => {
         </ControlsPortalContext.Provider>
       </div>
 
-      <Footer controlsRef={controlsRef} />
+      <Menu controlsRef={controlsRef} />
 
     </div>
   </HashRouter>
 }
 
-const Footer = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> }) => {
+const Menu = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> }) => {
   const [height, setHeight] = useState(0)
-  const footerRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const location = useLocation()
 
   useEffect(() => {
-    console.log(footerRef.current)
-    if (!footerRef.current) return
+    if (!menuRef.current) return
     const obs = new ResizeObserver((entries) => {
       setHeight(entries[0].target.getBoundingClientRect().height)
     })
-    obs.observe(footerRef.current)
+    obs.observe(menuRef.current)
     return () => obs.disconnect()
-  }, [footerRef.current])
+  }, [menuRef.current])
 
   return <>
-    <div className="footer-filler" style={{ height }}></div>
-    <div className="footer" ref={footerRef}>
+    <div className="menu-filler" style={{ height }}></div>
+    <div className="menu" ref={menuRef}>
       <div className="controls" ref={controlsRef}></div>
+      <div className="separator"></div>
       <div className="navigation">
         {routes.map(r =>
           <Link to={`/${r[0]}`}>
-            <button>{r[1]}</button>
+            <button type="button" disabled={location.pathname.startsWith(`/${r[0]}`)}>{r[1]}</button>
           </Link>)}
       </div>
     </div>

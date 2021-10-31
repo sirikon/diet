@@ -1,13 +1,14 @@
 import "./Planning.style.scss"
 
 import React from "react"
-import { Switch, Route, Link, Redirect } from "react-router-dom"
+import { Switch, Route, Link, Redirect, useLocation } from "react-router-dom"
 import { days, meals } from "../../../core/models"
 import { ControlsPortal } from "../../utils/ControlsPortal"
 import { weekPlan } from "../../../core/data"
 
 export default () => {
   
+  const location = useLocation()
   const dayNumbers = days.map((_, i) => (i+1)%days.length);
 
   return <>
@@ -34,7 +35,7 @@ export default () => {
       <div className="planning-controls">
         {dayNumbers.map((n) =>
           <Link to={`/planning/${days[n]}`}>
-            <button>{days[n]}</button>
+            <button type="button" disabled={location.pathname.startsWith(`/planning/${days[n]}`)}>{days[n]}</button>
           </Link>)}
       </div>
     </ControlsPortal>

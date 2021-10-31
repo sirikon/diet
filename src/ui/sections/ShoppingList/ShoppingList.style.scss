@@ -26,3 +26,20 @@
     }
   }
 }
+
+/* Desktop */
+@media (min-width: 800px) {
+
+  .shopping-list-controls > div {
+    display: block;
+
+    > span {
+      margin-right: .5em;
+    }
+
+    .date-input {
+      height: 1.5em;
+    }
+  }
+
+}
