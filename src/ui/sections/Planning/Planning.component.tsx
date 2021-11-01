@@ -1,23 +1,23 @@
 import "./Planning.style.scss"
 
 import React from "react"
-import { Switch, Route, Link, Redirect, useRouteMatch } from "react-router-dom"
+import { Link, useRouteMatch } from "react-router-dom"
 import { days, meals, Day } from "../../../core/models"
 import { ControlsPortal } from "../../utils/ControlsPortal"
 import { weekPlan } from "../../../core/data"
 
 const defaultDay = () => days[new Date().getDay()];
 
-const useCurrentDay = (): Day => {
-  const dayInRoute = useRouteMatch<{ day?: string }>("/:section?/:day?")?.params.day;
+const useNavigation = (basePath: string): Day => {
+  const dayInRoute = useRouteMatch<{ day?: string }>(basePath + "/:day?")?.params.day;
   if (dayInRoute == null) return defaultDay()
   if (days.indexOf(dayInRoute as Day) === -1) return defaultDay()
   return dayInRoute as Day;
 }
 
-export default () => {
-  
-  const day = useCurrentDay()
+export default ({ basePath }: { basePath: string }) => {
+
+  const day = useNavigation(basePath)
   const dayNumbers = days.map((_, i) => (i+1)%days.length);
 
   return <>

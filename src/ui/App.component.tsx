@@ -5,7 +5,7 @@ import { ControlsPortalContext } from "./utils/ControlsPortal"
 import ShoppingListSection from "./sections/ShoppingList/ShoppingList.component"
 import PlanningSection from "./sections/Planning/Planning.component"
 
-const sections: { [key: string]: { displayName: string, component: () => JSX.Element } } = {
+const sections: { [key: string]: { displayName: string, component: (args: { basePath: string }) => JSX.Element } } = {
   "planning": {
     displayName: "Planning",
     component: PlanningSection
@@ -18,8 +18,13 @@ const sections: { [key: string]: { displayName: string, component: () => JSX.Ele
 
 const getDefaultSection = () => Object.keys(sections)[0]
 
-const useCurrentSection = () => {
-  return useRouteMatch<{ section?: string }>("/:section?")?.params.section || getDefaultSection()
+const useNavigation = () => {
+  const path = "/:section?"
+  const match = useRouteMatch<{ section?: string }>(path)
+  return {
+    basePath: path,
+    currentSection: match?.params.section || getDefaultSection()
+  }
 }
 
 export default () => {
@@ -47,14 +52,14 @@ export default () => {
 }
 
 const CurrentSection = () => {
-  const currentSection = useCurrentSection()
-  return React.createElement(sections[currentSection].component)
+  const { currentSection, basePath } = useNavigation()
+  return React.createElement(sections[currentSection].component, { basePath })
 }
 
 const Menu = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> }) => {
   const [height, setHeight] = useState(0)
   const menuRef = useRef<HTMLDivElement>(null)
-  const currentSection = useCurrentSection()
+  const { currentSection } = useNavigation()
 
   useEffect(() => {
     if (!menuRef.current) return
