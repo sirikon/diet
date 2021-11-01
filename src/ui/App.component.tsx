@@ -1,17 +1,26 @@
 import "./App.style.scss"
-
 import React, { useState, useRef, useEffect } from "react"
-import { HashRouter, Switch, Route, Redirect, NavLink, Link, useLocation } from "react-router-dom"
-
+import { MemoryRouter, Link, useRouteMatch } from "react-router-dom"
 import { ControlsPortalContext } from "./utils/ControlsPortal"
-
 import ShoppingListSection from "./sections/ShoppingList/ShoppingList.component"
 import PlanningSection from "./sections/Planning/Planning.component"
 
-const routes: [string, string, () => JSX.Element][] = [
-  ["planning", "Planning", PlanningSection],
-  ["shopping-list", "Shopping List", ShoppingListSection],
-]
+const sections: { [key: string]: { displayName: string, component: () => JSX.Element } } = {
+  "planning": {
+    displayName: "Planning",
+    component: PlanningSection
+  },
+  "shopping-list": {
+    displayName: "Shopping List",
+    component: ShoppingListSection
+  }
+}
+
+const getDefaultSection = () => Object.keys(sections)[0]
+
+const useCurrentSection = () => {
+  return useRouteMatch<{ section?: string }>("/:section?")?.params.section || getDefaultSection()
+}
 
 export default () => {
 
@@ -22,33 +31,30 @@ export default () => {
     setControlsElement(controlsRef.current)
   }, [controlsRef.current])
 
-  return <HashRouter>
+  return <MemoryRouter>
     <div className="container">
 
       <div className="content">
         <ControlsPortalContext.Provider value={{ controlsElement }}>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to={`/${routes[0][0]}`}></Redirect>
-            </Route>
-            {routes.map(r =>
-              <Route path={`/${r[0]}`}>
-                {React.createElement(r[2])}
-              </Route>)}
-          </Switch>
+          <CurrentSection />
         </ControlsPortalContext.Provider>
       </div>
 
       <Menu controlsRef={controlsRef} />
 
     </div>
-  </HashRouter>
+  </MemoryRouter>
+}
+
+const CurrentSection = () => {
+  const currentSection = useCurrentSection()
+  return React.createElement(sections[currentSection].component)
 }
 
 const Menu = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> }) => {
   const [height, setHeight] = useState(0)
   const menuRef = useRef<HTMLDivElement>(null)
-  const location = useLocation()
+  const currentSection = useCurrentSection()
 
   useEffect(() => {
     if (!menuRef.current) return
@@ -65,9 +71,13 @@ const Menu = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> })
       <div className="controls" ref={controlsRef}></div>
       <div className="separator"></div>
       <div className="navigation">
-        {routes.map(r =>
-          <Link to={`/${r[0]}`}>
-            <button type="button" disabled={location.pathname.startsWith(`/${r[0]}`)}>{r[1]}</button>
+        {Object.keys(sections).map(section =>
+          <Link to={`/${section}`}>
+            <button
+              type="button"
+              disabled={section === currentSection}>
+              {sections[section].displayName}
+            </button>
           </Link>)}
       </div>
     </div>
