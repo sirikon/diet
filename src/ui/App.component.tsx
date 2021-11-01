@@ -1,6 +1,6 @@
 import "./App.style.scss"
 import React, { useState, useRef, useEffect } from "react"
-import { MemoryRouter, Link, useRouteMatch } from "react-router-dom"
+import { HashRouter, Link, useRouteMatch } from "react-router-dom"
 import { ControlsPortalContext } from "./utils/ControlsPortal"
 import ShoppingListSection from "./sections/ShoppingList/ShoppingList.component"
 import PlanningSection from "./sections/Planning/Planning.component"
@@ -36,7 +36,7 @@ export default () => {
     setControlsElement(controlsRef.current)
   }, [controlsRef.current])
 
-  return <MemoryRouter>
+  return <HashRouter>
     <div className="container">
 
       <div className="content">
@@ -48,7 +48,7 @@ export default () => {
       <Menu controlsRef={controlsRef} />
 
     </div>
-  </MemoryRouter>
+  </HashRouter>
 }
 
 const CurrentSection = () => {
