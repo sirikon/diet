@@ -1,5 +1,5 @@
 import "./App.style.scss"
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { HashRouter, Link, useRouteMatch } from "react-router-dom"
 import { ControlsPortalContext } from "./utils/ControlsPortal"
 import ShoppingListSection from "./sections/ShoppingList/ShoppingList.component"
@@ -29,12 +29,8 @@ const useNavigation = () => {
 
 export default () => {
 
-  const controlsRef = useRef<HTMLDivElement>(null)
   const [controlsElement, setControlsElement] = useState<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    setControlsElement(controlsRef.current)
-  }, [controlsRef.current])
+  const controlsRef = useCallback(setControlsElement, []);
 
   return <HashRouter>
     <div className="container">
@@ -56,19 +52,20 @@ const CurrentSection = () => {
   return React.createElement(sections[currentSection].component, { basePath })
 }
 
-const Menu = ({ controlsRef }: { controlsRef: React.RefObject<HTMLDivElement> }) => {
+const Menu = ({ controlsRef }: { controlsRef: React.LegacyRef<HTMLDivElement> }) => {
   const [height, setHeight] = useState(0)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const [menuElement, setMenuElement] = useState<HTMLDivElement | null>(null)
+  const menuRef = useCallback(setMenuElement, [])
   const { currentSection } = useNavigation()
 
   useEffect(() => {
-    if (!menuRef.current) return
+    if (!menuElement) return
     const obs = new ResizeObserver((entries) => {
       setHeight(entries[0].target.getBoundingClientRect().height)
     })
-    obs.observe(menuRef.current)
+    obs.observe(menuElement)
     return () => obs.disconnect()
-  }, [menuRef.current])
+  }, [menuElement])
 
   return <>
     <div className="menu-filler" style={{ height }}></div>
