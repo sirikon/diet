@@ -9,6 +9,7 @@ export const products = [
   "raciones Ensalada",
   "raciones Legumbres",
   "gr Almendras",
+  "gr Nueces",
   "gr Patatas",
   "gr Pechuga de pollo",
   "gr Pechuga de pavo",
@@ -16,7 +17,7 @@ export const products = [
   "gr Pescado azul",
   "gr Pescado blanco",
   "ml Leche",
-  "Arroces en vasitos para microondas",
+  "gr Arroz cocido",
   "Tomates",
   "Yogures naturales",
   "gr Chocolate 85%",
@@ -33,16 +34,18 @@ const breakfast = (): Item[] => [
   item(1, "Frutas grandes")
 ]
 
+const cookedWeight = (n: number) => n * 2.7;
+
 export const weekPlan: WeekPlan<Product> = {
   monday: {
     breakfast: breakfast(),
     lunch: [
       item(1, "raciones Verduras"),
-      item(200, "gr Pechuga de pollo"),
+      item(250, "gr Pechuga de pollo"),
       item(1, "Frutas grandes")
     ],
     dinner: [
-      item(1, "Arroces en vasitos para microondas"),
+      item(cookedWeight(70), "gr Arroz cocido"),
       item(200, "gr Pescado azul"),
       item(200, "ml Leche")
     ]
@@ -52,13 +55,13 @@ export const weekPlan: WeekPlan<Product> = {
     breakfast: breakfast(),
     lunch: [
       item(1, "raciones Verduras"),
-      item(200, "gr Pechuga de pavo"),
+      item(250, "gr Pechuga de pavo"),
       item(1, "raciones Lechuga"),
       item(1, "Tomates")
     ],
     dinner: [
       item(400, "gr Patatas"),
-      item(200, "gr Pescado blanco"),
+      item(250, "gr Pescado blanco"),
       item(200, "ml Leche")
     ]
   },
@@ -68,11 +71,11 @@ export const weekPlan: WeekPlan<Product> = {
     lunch: [
       item(1, "raciones Verduras"),
       item(100, "gr Patatas"),
-      item(200, "gr Pechuga de pollo")
+      item(250, "gr Pechuga de pollo")
     ],
     dinner: [
-      item(1, "Arroces en vasitos para microondas"),
-      item(200, "gr Pechuga de pollo"),
+      item(cookedWeight(70), "gr Arroz cocido"),
+      item(250, "gr Pechuga de pollo"),
       item(30, "gr Chocolate 85%")
     ]
   },
@@ -82,11 +85,11 @@ export const weekPlan: WeekPlan<Product> = {
     lunch: [
       item(200, "gr Carne roja"),
       item(1, "raciones Ensalada"),
-      item(40, "gr Almendras")
+      item(30, "gr Nueces")
     ],
     dinner: [
-      item(1, "Arroces en vasitos para microondas"),
-      item(200, "gr Pechuga de pavo"),
+      item(cookedWeight(70), "gr Arroz cocido"),
+      item(225, "gr Pechuga de pavo"),
       item(30, "gr Chocolate 85%")
     ]
   },
@@ -96,11 +99,11 @@ export const weekPlan: WeekPlan<Product> = {
     lunch: [
       item(200, "gr Carne roja"),
       item(1, "raciones Ensalada"),
-      item(40, "gr Almendras")
+      item(30, "gr Nueces")
     ],
     dinner: [
       item(400, "gr Patatas"),
-      item(200, "gr Pescado blanco"),
+      item(225, "gr Pescado blanco"),
       item(200, "ml Leche")
     ]
   },
@@ -108,7 +111,7 @@ export const weekPlan: WeekPlan<Product> = {
   saturday: {
     breakfast: breakfast(),
     lunch: [
-      item(200, "gr Pescado blanco")
+      item(250, "gr Pescado blanco")
     ],
     dinner: []
   },
@@ -117,12 +120,12 @@ export const weekPlan: WeekPlan<Product> = {
     breakfast: breakfast(),
     lunch: [
       item(1, "raciones Legumbres"),
-      item(200, "gr Pescado blanco"),
+      item(250, "gr Pescado blanco"),
       item(1, "Yogures naturales")
     ],
     dinner: [
-      item(1, "Arroces en vasitos para microondas"),
-      item(200, "gr Pechuga de pavo"),
+      item(cookedWeight(70), "gr Arroz cocido"),
+      item(225, "gr Pechuga de pavo"),
       item(30, "gr Chocolate 85%")
     ]
   }
